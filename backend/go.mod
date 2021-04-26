@@ -1,4 +1,4 @@
-module ntfmarket
+module nftmarket
 
 go 1.13
 
