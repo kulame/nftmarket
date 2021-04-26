@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=nftmarket
+      - POSTGRES_USER=ntfmarket
+      - POSTGRES_PASSWORD=ntfmarket
