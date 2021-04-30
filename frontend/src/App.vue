@@ -4,6 +4,7 @@
 </template>
 
 <script lang="ts">
+console.log("start app vue")
 import { defineComponent } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 
@@ -13,6 +14,7 @@ export default defineComponent({
     HelloWorld
   }
 })
+console.log("end app vue")
 </script>
 
 <style>

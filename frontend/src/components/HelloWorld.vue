@@ -35,6 +35,7 @@
 </template>
 
 <script lang="ts">
+console.log("start hello world")
 import { ref, defineComponent } from 'vue'
 export default defineComponent({
   name: 'HelloWorld',
@@ -49,6 +50,7 @@ export default defineComponent({
     return { count }
   }
 })
+console.log("end hello world")
 </script>
 
 <style scoped>
