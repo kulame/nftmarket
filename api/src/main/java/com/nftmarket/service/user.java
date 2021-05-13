@@ -32,11 +32,7 @@ public class user {
         System.out.println("create user"+email);
         
         return pgClient.preparedQuery(userCreateSql).execute(Tuple.of(email))
-            .map(rs -> {
-                System.out.println(rs);
-                return true;
-            })
-            .map(check -> Status.CREATED)
+            .map(rs -> Status.CREATED)
             .map(status -> Response.status(status).build());
 
     }
