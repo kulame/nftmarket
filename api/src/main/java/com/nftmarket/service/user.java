@@ -16,8 +16,8 @@ import io.vertx.mutiny.sqlclient.Tuple;
 @Path("/user")
 public class user {
 
-    static final String userCreateSql = "INSERT INTO user (email) values('$1') "+
-        "ON CONFLICT ON CONSTRAINT (email) DO NOTHING";
+    static final String userCreateSql = "INSERT INTO users(email,password_crypt) values($1,'') "+
+        "ON CONFLICT(email) DO NOTHING";
 
 
     @Inject

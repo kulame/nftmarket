@@ -8,7 +8,9 @@ CREATE TABLE "users" (
   "email" varchar(128) NOT NULL,
   "password_crypt" varchar(128) NOT NULL,
   "nickname" varchar(128),
-  "avator" varchar(255)
+  "avator" varchar(255),
+  unique (email),
+  unique(nickname)
 );
 
 
