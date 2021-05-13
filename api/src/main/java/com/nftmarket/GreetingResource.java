@@ -24,14 +24,10 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Uni<String> hello() {
-        System.out.println("start hello");
         Uni<RowSet<Row>> rowSet = pgClient.query("select * from user").execute();
-        System.out.println(rowSet);
         rowSet.map(rs -> {
-            System.out.println(rs.rowCount());
             return true;
         }).await().indefinitely();
-        System.out.println("end hello");
         return Uni.createFrom()
                 .item(() -> "Hello!")
                 .onItem().transform(n -> String.format("hello %s", n));
