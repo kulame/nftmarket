@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import io.vertx.mutiny.pgclient.PgPool;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.sqlclient.Tuple;
+import javax.ws.rs.core.Response.Status;
 
 @Path("/user")
 public class user {
@@ -30,18 +31,13 @@ public class user {
     public Uni<Response> createUser(@FormParam("email") String email){
         System.out.println("create user"+email);
         
-        pgClient.preparedQuery(userCreateSql).execute(Tuple.of(email))
+        return pgClient.preparedQuery(userCreateSql).execute(Tuple.of(email))
             .map(rs -> {
                 System.out.println(rs);
                 return true;
-            }).await().indefinitely();
-
-
-        return Uni.createFrom().item("hello")
-        .map(item -> URI.create(item))
-        .map(uri ->{
-            return Response.created(uri).build();
-        });
+            })
+            .map(check -> Status.CREATED)
+            .map(status -> Response.status(status).build());
 
     }
     
