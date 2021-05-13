@@ -3,6 +3,6 @@
 BEGIN;
 
 -- XXX Add verifications here.
-select 1 from user limit 1;
+select 1 from users limit 1;
 
 ROLLBACK;

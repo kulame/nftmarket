@@ -3,7 +3,7 @@
 BEGIN;
 
 -- XXX Add DDLs here.
-CREATE TABLE "user" (
+CREATE TABLE "users" (
   "id" bigserial NOT NULL,
   "email" varchar(128) NOT NULL,
   "password_crypt" varchar(128) NOT NULL,

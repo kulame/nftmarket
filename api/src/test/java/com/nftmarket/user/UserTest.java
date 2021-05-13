@@ -13,6 +13,7 @@ public class UserTest {
     @Test
     public void testCreateUser(){
         given()
+            .param("email","kula@live.com")
             .when().post("/user")
             .then()
                 .statusCode(201);

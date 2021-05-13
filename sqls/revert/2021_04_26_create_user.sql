@@ -3,5 +3,5 @@
 BEGIN;
 
 -- XXX Add DDLs here.
-drop table "user";
+drop table "users";
 COMMIT;

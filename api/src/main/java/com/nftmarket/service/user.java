@@ -6,15 +6,37 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import javax.ws.rs.FormParam;   
+import javax.inject.Inject;
+import io.vertx.mutiny.pgclient.PgPool;
 import io.smallrye.mutiny.Uni;
+import io.vertx.mutiny.sqlclient.Tuple;
 
 @Path("/user")
 public class user {
 
+    static final String userCreateSql = "INSERT INTO user (email) values('$1') "+
+        "ON CONFLICT ON CONSTRAINT (email) DO NOTHING";
+
+
+    @Inject
+    PgPool pgClient;
+
+
+    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<Response> createUser(){
-        System.out.println("create user");
+    public Uni<Response> createUser(@FormParam("email") String email){
+        System.out.println("create user"+email);
+        
+        pgClient.preparedQuery(userCreateSql).execute(Tuple.of(email))
+            .map(rs -> {
+                System.out.println(rs);
+                return true;
+            }).await().indefinitely();
+
+
         return Uni.createFrom().item("hello")
         .map(item -> URI.create(item))
         .map(uri ->{
