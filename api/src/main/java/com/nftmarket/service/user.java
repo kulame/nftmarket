@@ -14,6 +14,7 @@ public class user {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> createUser(){
+        System.out.println("create user");
         return Uni.createFrom().item("hello")
         .map(item -> URI.create(item))
         .map(uri ->{
