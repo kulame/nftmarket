@@ -13,6 +13,7 @@ import io.vertx.mutiny.pgclient.PgPool;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.sqlclient.Tuple;
 import javax.ws.rs.core.Response.Status;
+import io.vertx.core.json.JsonObject;
 
 @Path("/user")
 public class user {
@@ -32,8 +33,13 @@ public class user {
         System.out.println("create user"+email);
         
         return pgClient.preparedQuery(userCreateSql).execute(Tuple.of(email))
-            .map(rs -> Status.CREATED)
-            .map(status -> Response.status(status).build());
+            .map(status -> {
+                var data = new JsonObject();
+                data.put("data",new JsonObject());
+                data.put("result",0);
+                return data;
+            })
+            .map(json -> Response.status(Status.CREATED).entity(json).build());
 
     }
     

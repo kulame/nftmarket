@@ -16,6 +16,8 @@ public class UserTest {
             .param("email","kula@live.com")
             .when().post("/user")
             .then()
+                .log()
+                .all()
                 .statusCode(201);
     }
     
