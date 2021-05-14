@@ -8,13 +8,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import javax.ws.rs.FormParam;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.GET;
 import javax.inject.Inject;
 import io.vertx.mutiny.pgclient.PgPool;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.sqlclient.Tuple;
+import io.vertx.mutiny.sqlclient.RowSet;
+import io.vertx.mutiny.sqlclient.Row;
 import javax.ws.rs.core.Response.Status;
 import io.vertx.core.json.JsonObject;
 
@@ -50,13 +51,21 @@ public class user {
     @Path("/check")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> checkUser(@QueryParam("email") String email){
-        System.out.println("email:"+email);
         return pgClient.preparedQuery(userCheckSql).execute(Tuple.of(email))
             .map(rs ->{
+                boolean exist = false;
+                if (rs.size()  == 1){
+                    exist = true;
+                }
+                rs.iterator().forEachRemaining(row -> {
+                    System.out.println(row.getString("email"));
+                });
+                var json = new JsonObject();
                 var data = new JsonObject();
-                data.put("data", new JsonObject());
-                data.put("result",0);
-                return data;
+                data.put("exist",exist);
+                json.put("data", data);
+                json.put("result",0);
+                return json;
             })
             .map(json -> Response.ok(json).build());
 
