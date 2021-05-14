@@ -16,10 +16,21 @@ public class UserTest {
             .param("email","kula@live.com")
             .when().post("/user")
             .then()
-                .log()
-                .all()
+                //.log().all()
                 .statusCode(201);
     }
+
+    @Test
+    public void TestCheckUser(){
+        given()
+            .param("email","kula@live.com")
+            .when()
+                .get("/user/check")
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
     
 }
 

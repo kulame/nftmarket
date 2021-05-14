@@ -7,7 +7,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import javax.ws.rs.FormParam;   
+import javax.ws.rs.FormParam;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.GET;
 import javax.inject.Inject;
 import io.vertx.mutiny.pgclient.PgPool;
 import io.smallrye.mutiny.Uni;
@@ -21,6 +24,8 @@ public class user {
     static final String userCreateSql = "INSERT INTO users(email,password_crypt) values($1,'') "+
         "ON CONFLICT(email) DO NOTHING";
 
+    static final String userCheckSql = "select * from users where email = $1 limit 1";
+
 
     @Inject
     PgPool pgClient;
@@ -30,17 +35,32 @@ public class user {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> createUser(@FormParam("email") String email){
-        System.out.println("create user"+email);
         
         return pgClient.preparedQuery(userCreateSql).execute(Tuple.of(email))
-            .map(status -> {
+            .map(rs -> {
                 var data = new JsonObject();
                 data.put("data",new JsonObject());
                 data.put("result",0);
                 return data;
             })
             .map(json -> Response.status(Status.CREATED).entity(json).build());
+    }
+
+    @GET
+    @Path("/check")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> checkUser(@QueryParam("email") String email){
+        System.out.println("email:"+email);
+        return pgClient.preparedQuery(userCheckSql).execute(Tuple.of(email))
+            .map(rs ->{
+                var data = new JsonObject();
+                data.put("data", new JsonObject());
+                data.put("result",0);
+                return data;
+            })
+            .map(json -> Response.ok(json).build());
 
     }
+
     
 }
