@@ -22,8 +22,10 @@ import io.vertx.core.json.JsonObject;
 @Path("/user")
 public class user {
 
-    static final String userCreateSql = "INSERT INTO users(email,password_crypt) values($1,'') "+
-        "ON CONFLICT(email) DO NOTHING";
+    static final String userCreateSql = """
+        INSERT INTO users(email,password_crypt) values($1,'') 
+        ON CONFLICT(email) DO NOTHING
+    """;
 
     static final String userCheckSql = "select * from users where email = $1 limit 1";
 
