@@ -27,7 +27,9 @@ public class user {
         ON CONFLICT(email) DO NOTHING
     """;
 
-    static final String userCheckSql = "select * from users where email = $1 limit 1";
+    static final String userCheckSql = """
+        select * from users where email = $1 limit 1
+    """;
 
 
     @Inject
