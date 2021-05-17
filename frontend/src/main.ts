@@ -6,4 +6,7 @@ import App from './App.vue'
 import '@/style/basic.styl'
 
 const app = createApp(App)
-importUiFramework(app).use(router).use(store, key).mount('#app')
+importUiFramework(app)
+    .use(router)
+    .use(store, key)
+    .mount('#app')
