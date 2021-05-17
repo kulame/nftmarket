@@ -8,7 +8,7 @@
 <script language='ts'>
 
 import { defineComponent,reactive } from 'vue'
-//import info from '@/components/Info.vue'
+import info from '@/components/Info.vue'
 export default defineComponent({
   name: 'Login',
 })
