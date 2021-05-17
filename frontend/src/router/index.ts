@@ -1,23 +1,34 @@
-import type { RouteRecordRaw } from "vue-router";
-import type {App} from "vue";
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
+import Home from '@/views/Home.vue'
+import Vuex from '@/views/Vuex.vue'
+import Test from '@/views/Test.vue'
 
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/vuex',
+    name: 'Vuex',
+    component: Vuex
+  },
+  {
+    path: '/axios',
+    name: 'Axios',
+    component: () => import('@/views/Axios.vue') // 懒加载 Axios 组件
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
+  }
+]
 
-export const LoginRoute:RouteRecordRaw = {
-    path:"/Login",
-    name:"Login",
-    component: () => import("../components/HelloWorld.vue"),
-};
-
-export const routes = [LoginRoute];
-
-const router = createRouter({
-    history:createWebHashHistory(),
-    routes,
+const router: Router = createRouter({
+  history: createWebHashHistory(),
+  routes
 })
 
-export function setupRouter(app:App<Element>){
-    app.use(router);
-}
-
-export default router;
+export default router
