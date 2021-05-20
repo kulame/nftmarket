@@ -27,10 +27,12 @@
     "@onflow/fcl": "^0.0.70",
     "@onflow/sdk": "^0.0.46",
     "elliptic": "^6.5.4",
+    "pg-promise": "^10.10.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
-    "sha3": "^2.1.4"
+    "sha3": "^2.1.4",
+    "slonik": "^23.7.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",

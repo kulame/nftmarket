@@ -11,10 +11,10 @@ describe('FlowService', () => {
         {provide:FlowService, useClass:jest.fn()},
       ],
     }).compile();
-    let service = module.get<FlowService>(FlowService)
+    service = module.get<FlowService>(FlowService)
   });
 
   it('should be defined', () => {
-    //expect(service).toBeDefined();
+    expect(service).toBeDefined();
   });
 });

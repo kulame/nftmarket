@@ -14,11 +14,11 @@ const ec: EC = new EC("p256");
 export class FlowService {
 
   constructor(
-    private readonly minterFlowAddress: String,
-    private readonly minterPrivateKeyHex: String,
-    private readonly minterAccountIndex: String | number
+    private readonly minterFlowAddress: string,
+    private readonly minterPrivateKeyHex: string,
+    private readonly minterAccountIndex: string | number
   ) {}
-/*
+
   authorizeMinter = () => {
     return async (account: any = {}) => {
       const user = await this.getAccount(this.minterFlowAddress);
@@ -45,13 +45,13 @@ export class FlowService {
         roles: account.roles,
       };
     };
-  };*/
+  };
 
   getAccount = async (addr: string) => {
     const { account } = await fcl.send([fcl.getAccount(addr)]);
     return account;
   };
-/*
+
   private signWithKey = (privateKey: string, msg: string) => {
     const key = ec.keyFromPrivate(Buffer.from(privateKey, "hex"));
     const sig = key.sign(this.hashMsg(msg));
@@ -96,5 +96,5 @@ export class FlowService {
     const block = await sdk.send(await sdk.build([sdk.getBlock(true)]));
     const decoded = await sdk.decode(block);
     return decoded.height;
-  }*/
+  }
 }
