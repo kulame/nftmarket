@@ -25,6 +25,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/block/tsconfig.app.json"
       }
+    },
+    "flow": {
+      "type": "library",
+      "root": "libs/flow",
+      "entryFile": "index",
+      "sourceRoot": "libs/flow/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/flow/tsconfig.lib.json"
+      }
     }
   }
 }
