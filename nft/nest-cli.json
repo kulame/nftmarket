@@ -1,4 +1,30 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+  "sourceRoot": "apps/nft/src",
+  "monorepo": true,
+  "root": "apps/nft",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/nft/tsconfig.app.json"
+  },
+  "projects": {
+    "nft": {
+      "type": "application",
+      "root": "apps/nft",
+      "entryFile": "main",
+      "sourceRoot": "apps/nft/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/nft/tsconfig.app.json"
+      }
+    },
+    "block": {
+      "type": "application",
+      "root": "apps/block",
+      "entryFile": "main",
+      "sourceRoot": "apps/block/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/block/tsconfig.app.json"
+      }
+    }
+  }
 }
