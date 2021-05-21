@@ -97,4 +97,11 @@ export class FlowService {
     const decoded = await sdk.decode(block);
     return decoded.height;
   }
+  
+  async getBlockByHeight(height:number){
+    return await sdk.send(sdk.build([
+        sdk.getBlock(),
+        sdk.atBlockHeight(height)
+    ])).then(sdk.decode);
+  }
 }
