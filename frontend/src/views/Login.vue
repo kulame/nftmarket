@@ -5,11 +5,27 @@
     </div>
 </template>
 
-<script language='ts'>
+<script lang='ts'>
 
 import { defineComponent,reactive } from 'vue'
-import info from '@/components/Info.vue'
-export default defineComponent({
+import { useRouter } from "vue-router"
+import info, { ContextProps } from '@/components/Info.vue'
+
+export default {
   name: 'Login',
-})
+  components:{
+    info
+  },
+  setup(){
+    const router = useRouter();
+    const contextInfo:ContextProps = reactive({
+      Email:"",
+    });
+
+    return {
+      contextInfo,
+      router
+    };
+  }
+};
 </script>
